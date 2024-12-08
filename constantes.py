@@ -48,6 +48,8 @@ Nave.y = janela.height - Nave.height
 K = 0
 tiro_delay = 0.3
 tiro = []
+pontos = 0
+
 
 inimigos = [[GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png")],[GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png")],[GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png"),GameImage("inimigos.png")]]
 

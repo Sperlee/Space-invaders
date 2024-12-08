@@ -23,8 +23,9 @@ def tela_do_jogo(mouse,teclado):
     # Adicione uma flag para verificar se o jogo deve ser reiniciado
     reiniciar_jogo = False
 
-    for i in range(3):
-        for j in range(5):
+    # colisão do tiro
+    for i in range(2,-1,-1):
+        for j in range(4,-1,-1):
             if inimigos[i][j] != 0:
                 inimigos[i][j].draw()
                 for k in tiro:
@@ -32,18 +33,20 @@ def tela_do_jogo(mouse,teclado):
                         if inimigos[i][j].collided(k):
                             inimigos[i][j] = 0
                             tiro.remove(k)
+                            constantes.pontos += 10
 
-    for i in range(3):
-        for j in range(5):
+    #colisão nas paredes
+    for i in range(2,-1,-1):
+        for j in range(4,-1,-1):
             if inimigos[i][j] != 0:
                 inimigos[i][j].x += constantes.velocidade_inimigo
                 if inimigos[i][j].x >= janela.width - inimigos[i][j].width or inimigos[i][j].x <= 0:
                     constantes.velocidade_inimigo = -1 * constantes.velocidade_inimigo
-                    for x in range(3):
-                        for y in range(5):
+                    for x in range(2,-1,-1):
+                        for y in range(4,-1,-1):
                             if inimigos[x][y] != 0:
                                 inimigos[x][y].y += 100
-                                if inimigos[x][y].y >= Nave.y:
+                                if inimigos[x][y].y >= Nave.y - 50:
                                     resetar.reset()
                                     inicio.Menu(janela,mouse,teclado)
 
@@ -58,7 +61,8 @@ def tela_do_jogo(mouse,teclado):
     janela.draw_text(f"FPS: {constantes.fpstext}", 60, 10, size=20, color=(255, 255, 255),
                  font_name="Arial", bold=True, italic=False)
 
-
+    janela.draw_text(f"Pontos:{constantes.pontos}",janela.width - 150,janela.height - 50,size=20, color=(255, 255, 255),
+                 font_name="Arial", bold=True, italic=False)
 
     for i in tiro:
         i.y -= 5

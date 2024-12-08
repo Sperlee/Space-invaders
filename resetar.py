@@ -2,6 +2,7 @@ import constantes
 from PPlay.gameimage import GameImage
 
 def reset():
+    constantes.pontos = 0
     constantes.Nave.x = constantes.janela.width/2 - constantes.Nave.width/2
     constantes.Nave.y = constantes.janela.height - constantes.Nave.height
 
