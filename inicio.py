@@ -2,6 +2,7 @@ import constantes
 import jogo
 from constantes import*
 import resetar
+import rank
 
 #Função Menu:
 def Menu (janela,mouse,teclado):
@@ -9,7 +10,9 @@ def Menu (janela,mouse,teclado):
     menu = True
     dificuldades = False
     play = False
-
+    Rank = False
+    C = 0
+    dificuldade = 1
     while True:
         constantes.cenario.draw()
 
@@ -27,6 +30,9 @@ def Menu (janela,mouse,teclado):
             if mouse.is_over_object(botaodif) and mouse.is_button_pressed(1):
                 menu = False
                 dificuldades = True
+            if mouse.is_over_object(botaorank) and mouse.is_button_pressed(1):
+                menu = False
+                Rank = True
 
         #Quando estiver na tela de dificuldades:
         if dificuldades == True:
@@ -35,18 +41,30 @@ def Menu (janela,mouse,teclado):
             constantes.botaodificil.draw()
             constantes.botaoback.draw()
             if mouse.is_over_object(botaofacil) and mouse.is_button_pressed(1):
-                constantes.dificuldade = 1
+                dificuldade = 1
+                menu = True
+                dificuldades = False
             if mouse.is_over_object(botaomedio) and mouse.is_button_pressed(1):
-                constantes.dificuldade = 2
+                dificuldade = 2
+                menu = True
+                dificuldades = False
             if mouse.is_over_object(botaodificil) and mouse.is_button_pressed(1):
-                constantes.dificuldade = 3
-            if mouse.is_over_object(botaoback) and mouse.is_button_pressed(1):
+                dificuldade = 3
+                menu = True
+                dificuldades = False
+            if mouse.is_over_object(botaoback) and mouse.is_button_pressed(1) or teclado.key_pressed("ESC"):
                 dificuldades = False
                 menu = True
 
         #Quando estiver no gameloop vazio:
+        if Rank == True:
+            rank.exibir_ranking(janela)
+        if teclado.key_pressed("ESC"):
+            menu = True
+            Rank = False
+
         if play == True:
-            jogo.tela_do_jogo(mouse,teclado)
+            jogo.tela_do_jogo(mouse,teclado,dificuldade)
 
 
         janela.update()

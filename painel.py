@@ -10,3 +10,4 @@ from constantes import mouse
 
 while True:
     Menu(janela,mouse,teclado)
+    
